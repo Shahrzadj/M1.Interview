@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Personnel.Data;
+using Data;
 
-namespace Personnel.Data.Migrations
+namespace Data.Migrations
 {
     [DbContext(typeof(PersonnelDbContext))]
     partial class PersonnelDbContextModelSnapshot : ModelSnapshot

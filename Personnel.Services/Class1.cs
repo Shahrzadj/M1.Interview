@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Personnel.Services
+namespace Services
 {
     public class Class1
     {

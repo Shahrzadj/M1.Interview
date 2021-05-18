@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Personnel.WebFramework\Personnel.WebFramework.csproj" />
+    <ProjectReference Include="..\Personnel.WebFramework\WebFramework.csproj" />
   </ItemGroup>
 
 

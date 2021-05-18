@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Personnel.WebFramework
+namespace WebFramework
 {
     public class Class1
     {

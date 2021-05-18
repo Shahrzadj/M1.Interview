@@ -11,10 +11,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Personnel.Data;
-using Personnel.Entities;
+using Data;
+using Data.Contracts;
+using Data.Repositories;
+using Entities;
 
-namespace Personnel.Api
+namespace Api
 {
     public class Startup
     {
@@ -33,6 +35,8 @@ namespace Personnel.Api
                 {
                     options.UseSqlServer(Configuration.GetConnectionString("SqlServer"));
                 });
+
+            services.AddScoped<IPersonnelRepository, PersonnelRepository>();
 
         }
 
