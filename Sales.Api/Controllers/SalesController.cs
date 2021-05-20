@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -33,7 +34,7 @@ namespace Sales.Api.Controllers
             _salesRepository.Add(new Entities.Sales.Sales()
             {
                 PersonnelId = salesDto.PersonnelId,
-                ReportDate = salesDto.ReportDate,
+                ReportDate = new DateTime(),
                 SalesAmount = salesDto.SalesAmount
             });
         }
