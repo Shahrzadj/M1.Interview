@@ -22,10 +22,6 @@ namespace Personnel.Data.Repositories
 
 
         #region Sync Methods
-        public virtual TEntity GetById(params object[] ids)
-        {
-            return Entities.Find(ids);
-        }
         public virtual void Add(TEntity entity, bool saveNow = true)
         {
             Assert.NotNull(entity, nameof(entity));

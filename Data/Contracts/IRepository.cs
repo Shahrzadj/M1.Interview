@@ -8,7 +8,6 @@ namespace Personnel.Data.Contracts
         DbSet<TEntity> Entities { get; }
         IQueryable<TEntity> Table { get; }
         IQueryable<TEntity> TableNoTracking { get; }
-        TEntity GetById(params object[] ids);
         void Add(TEntity entity, bool saveNow = true);
         void Delete(TEntity entity, bool saveNow = true);
         void Update(TEntity entity, bool saveNow = true);
