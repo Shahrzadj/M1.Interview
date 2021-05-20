@@ -1,4 +1,4 @@
-﻿namespace Common.Dtos.Personnel
+﻿namespace Personnel.Common.Dtos.Personnel
 {
     public class CreatePersonnelDto
     {

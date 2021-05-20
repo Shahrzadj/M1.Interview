@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Entities.Personnel;
-
-namespace Data.Contracts
+﻿namespace Personnel.Data.Contracts
 {
-    public interface IPersonnelRepository: IRepository<Personnel>
+    public interface IPersonnelRepository: IRepository<Personnel.Entities.Personnel.PersonnelModel>
     { }
 }

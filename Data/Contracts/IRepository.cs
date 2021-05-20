@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
-namespace Data.Contracts
+namespace Personnel.Data.Contracts
 {
     public interface IRepository<TEntity> where TEntity : class
     {

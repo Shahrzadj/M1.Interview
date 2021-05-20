@@ -1,10 +1,9 @@
-﻿ using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-
-namespace Entities.Personnel
+namespace Personnel.Entities.Personnel
 {
-    public class Personnel
+    public class PersonnelModel
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

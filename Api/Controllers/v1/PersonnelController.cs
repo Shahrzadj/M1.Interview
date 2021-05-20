@@ -1,10 +1,11 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using Data.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Personnel.Data.Contracts;
 
-namespace Api.Controllers.v1
+
+namespace Personnel.Api.Controllers.v1
 {
     [ApiController]
     [Route("api/v1/[controller]")]

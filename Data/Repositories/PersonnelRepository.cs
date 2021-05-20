@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Data.Contracts;
-using Entities.Personnel;
+﻿using Data;
+using Personnel.Data.Contracts;
 
-
-namespace Data.Repositories
+namespace Personnel.Data.Repositories
 {
-    public class PersonnelRepository: Repository<Personnel>, IPersonnelRepository
+    public class PersonnelRepository: Repository<Personnel.Entities.Personnel.PersonnelModel>, IPersonnelRepository
     {
         public PersonnelRepository(PersonnelDbContext dbContext) 
             : base(dbContext)

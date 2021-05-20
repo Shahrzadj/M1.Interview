@@ -1,14 +1,16 @@
+
+
+using Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Data;
-using Data.Contracts;
-using Data.Repositories;
-using Microsoft.EntityFrameworkCore;
+using Personnel.Data.Contracts;
+using Personnel.Data.Repositories;
 
-namespace Api
+namespace Personnel.Api
 {
     public class Startup
     {

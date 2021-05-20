@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Entities.Personnel;
 using Microsoft.EntityFrameworkCore;
+using Personnel.Entities.Personnel;
 
 namespace Data
 {
@@ -11,6 +11,6 @@ namespace Data
         public PersonnelDbContext(DbContextOptions<PersonnelDbContext> options)
             :base(options) { }
 
-        public DbSet<Personnel> Personnel { get; set; }
+        public DbSet<PersonnelModel> Personnel { get; set; }
     }
 }

@@ -1,9 +1,10 @@
 ﻿using System.Linq;
-using Common.Utilities;
-using Data.Contracts;
+using Data;
 using Microsoft.EntityFrameworkCore;
+using Personnel.Common.Utilities;
+using Personnel.Data.Contracts;
 
-namespace Data.Repositories
+namespace Personnel.Data.Repositories
 {
     public class Repository<TEntity> : IRepository<TEntity>
         where TEntity : class

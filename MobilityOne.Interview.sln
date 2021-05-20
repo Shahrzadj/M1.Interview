@@ -5,21 +5,21 @@ VisualStudioVersion = 16.0.30320.27
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Microservices", "Microservices", "{E6CBCF86-DA95-4350-A2B9-519A34B835A3}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sales", "Sales", "{B0B26D87-203A-4D42-A8BF-DB38360867F2}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SalesMicroService", "SalesMicroService", "{B0B26D87-203A-4D42-A8BF-DB38360867F2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PersonnelMicroService", "PersonnelMicroService", "{CA334738-D918-4EB9-8FE8-B5ED06D6FC25}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{A3743D11-F111-4F2A-AF76-A937579A4BA8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Personnel.Common", "Common\Personnel.Common.csproj", "{A3743D11-F111-4F2A-AF76-A937579A4BA8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Data.csproj", "{85FBDB13-D311-4183-A2A1-35ADDEA69FA3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Personnel.Data", "Data\Personnel.Data.csproj", "{85FBDB13-D311-4183-A2A1-35ADDEA69FA3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entities", "Entities\Entities.csproj", "{0F7BF069-EDBE-47FC-9A64-3D646A27A7B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Personnel.Entities", "Entities\Personnel.Entities.csproj", "{0F7BF069-EDBE-47FC-9A64-3D646A27A7B4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebFramework", "WebFramework\WebFramework.csproj", "{FDAB1719-C4EE-46A2-83D0-59E13900B558}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Personnel.WebFramework", "WebFramework\Personnel.WebFramework.csproj", "{FDAB1719-C4EE-46A2-83D0-59E13900B558}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Services.csproj", "{8F7071F6-C9D6-464B-8068-B26BA34B4886}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Personnel.Services", "Services\Personnel.Services.csproj", "{8F7071F6-C9D6-464B-8068-B26BA34B4886}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "Api\Api.csproj", "{050C2D68-C315-4060-BDFF-2BE87BFD263C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Personnel.Api", "Api\Personnel.Api.csproj", "{050C2D68-C315-4060-BDFF-2BE87BFD263C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sales.Common", "Sales.Common\Sales.Common.csproj", "{348C3498-568C-4D3E-BDC4-F3D8D069098D}"
 EndProject
