@@ -11,6 +11,6 @@ namespace Data
         public PersonnelDbContext(DbContextOptions<PersonnelDbContext> options)
             :base(options) { }
 
-        public DbSet<Personnel> Personnels { get; set; }
+        public DbSet<Personnel> Personnel { get; set; }
     }
 }
