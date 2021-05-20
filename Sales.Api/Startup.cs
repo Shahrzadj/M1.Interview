@@ -12,6 +12,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Sales.Data;
+using Sales.Data.Contracts;
+using Sales.Data.Repositories;
 
 namespace Sales.Api
 {
@@ -32,6 +34,7 @@ namespace Sales.Api
             {
                 options.UseSqlServer(Configuration.GetConnectionString("SqlServer"));
             });
+            services.AddScoped<ISalesRepository, SalesRepository>();
 
         }
 

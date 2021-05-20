@@ -1,20 +1,19 @@
 ﻿using System.Linq;
-using Data;
 using Microsoft.EntityFrameworkCore;
-using Personnel.Common.Utilities;
-using Personnel.Data.Contracts;
+using Sales.Common.Utilities;
+using Sales.Data.Contracts;
 
-namespace Personnel.Data.Repositories
+namespace Sales.Data.Repositories
 {
     public class Repository<TEntity> : IRepository<TEntity>
         where TEntity : class
     {
-        protected readonly PersonnelDbContext DbContext;
+        protected readonly SalesDbContext DbContext;
         public DbSet<TEntity> Entities { get; }
         public virtual IQueryable<TEntity> Table => Entities;
         public virtual IQueryable<TEntity> TableNoTracking => Entities.AsNoTracking();
 
-        public Repository(PersonnelDbContext dbContext)
+        public Repository(SalesDbContext dbContext)
         {
             DbContext = dbContext;
             Entities = DbContext.Set<TEntity>(); 
@@ -22,10 +21,6 @@ namespace Personnel.Data.Repositories
 
 
         #region Sync Methods
-        public virtual TEntity GetById(params object[] ids)
-        {
-            return Entities.Find(ids);
-        }
         public virtual void Add(TEntity entity, bool saveNow = true)
         {
             Assert.NotNull(entity, nameof(entity));
