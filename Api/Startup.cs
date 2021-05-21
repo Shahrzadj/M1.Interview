@@ -1,5 +1,3 @@
-
-
 using Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -7,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using Personnel.Data.Contracts;
 using Personnel.Data.Repositories;
 
@@ -24,13 +23,23 @@ namespace Personnel.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            #region Swagger
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "Personnel Api",
+                    Version = "v1"
+                });
+            });
+            #endregion
             services.AddDbContext<PersonnelDbContext>(options =>
                 {
                     options.UseSqlServer(Configuration.GetConnectionString("SqlServer"));
                 });
 
             services.AddScoped<IPersonnelRepository, PersonnelRepository>();
+            services.AddControllers();
 
         }
 
@@ -44,10 +53,16 @@ namespace Personnel.Api
 
             app.UseHttpsRedirection();
 
-            app.UseRouting();
+           
 
             app.UseAuthorization();
 
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Personnel Api");
+            });
+            app.UseRouting();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

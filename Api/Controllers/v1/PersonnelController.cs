@@ -19,14 +19,14 @@ namespace Personnel.Api.Controllers.v1
         {
             _personnelRepository = personnelRepository;
         }
-        [Route("~/api/Personnel/GetAll")]
+
+        [HttpGet]
         public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
         {
             var personnel = await _personnelRepository.TableNoTracking.ToListAsync(cancellationToken);
             return Ok(personnel);
         }
 
-        [Route("~/api/Personnel/Add")]
         [HttpPost]
         public void Add(PersonnelDto personnelDto)
         {
@@ -38,8 +38,7 @@ namespace Personnel.Api.Controllers.v1
             });
         }
 
-        [Route("~/api/Personnel/Update")]
-        [HttpPost]
+        [HttpPut]
         public void Update(PersonnelDto personnelDto)
         {
             var itemToUpdate =  _personnelRepository.Table.FirstOrDefault(p=>p.Id==personnelDto.Id);
@@ -52,8 +51,7 @@ namespace Personnel.Api.Controllers.v1
             }
         }
 
-        [Route("~/api/Personnel/delete")]
-        [HttpPost]
+        [HttpDelete]
         public void Delete(int id)
         {
             var itemToDelete =  _personnelRepository.Table.FirstOrDefault(p=>p.Id==id);;

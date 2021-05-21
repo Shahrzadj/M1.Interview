@@ -21,13 +21,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Personnel.Services", "Servi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Personnel.Api", "Api\Personnel.Api.csproj", "{050C2D68-C315-4060-BDFF-2BE87BFD263C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sales.Common", "Sales.Common\Sales.Common.csproj", "{348C3498-568C-4D3E-BDC4-F3D8D069098D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sales.Common", "Sales.Common\Sales.Common.csproj", "{348C3498-568C-4D3E-BDC4-F3D8D069098D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sales.Entities", "Sales.Entities\Sales.Entities.csproj", "{9B1F0C92-F5FB-4FF9-9CEE-4A35C39D8C15}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sales.Entities", "Sales.Entities\Sales.Entities.csproj", "{9B1F0C92-F5FB-4FF9-9CEE-4A35C39D8C15}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sales.Data", "Sales.Data\Sales.Data.csproj", "{B1023625-6FB6-46D7-AC9B-56ABF0292207}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sales.Data", "Sales.Data\Sales.Data.csproj", "{B1023625-6FB6-46D7-AC9B-56ABF0292207}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sales.Api", "Sales.Api\Sales.Api.csproj", "{53BB0514-9422-4282-9046-DE5B7373CDE8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sales.Api", "Sales.Api\Sales.Api.csproj", "{53BB0514-9422-4282-9046-DE5B7373CDE8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gateway.WebApi", "Gateway.WebApi\Gateway.WebApi.csproj", "{CF560DEE-F3EB-4BE9-93DA-1DB14CE81E8B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +77,10 @@ Global
 		{53BB0514-9422-4282-9046-DE5B7373CDE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53BB0514-9422-4282-9046-DE5B7373CDE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53BB0514-9422-4282-9046-DE5B7373CDE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF560DEE-F3EB-4BE9-93DA-1DB14CE81E8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF560DEE-F3EB-4BE9-93DA-1DB14CE81E8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF560DEE-F3EB-4BE9-93DA-1DB14CE81E8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF560DEE-F3EB-4BE9-93DA-1DB14CE81E8B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

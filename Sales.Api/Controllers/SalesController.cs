@@ -20,14 +20,13 @@ namespace Sales.Api.Controllers
             _salesRepository = salesRepository;
         }
 
-        [Route("~/api/Sales/GetAll")]
+        [HttpGet]
         public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
         {
             var sales = await _salesRepository.TableNoTracking.ToListAsync(cancellationToken);
             return Ok(sales);
         }
 
-        [Route("~/api/Sales/Add")]
         [HttpPost]
         public void Add(SalesDto salesDto)
         {
@@ -39,8 +38,7 @@ namespace Sales.Api.Controllers
             });
         }
 
-        [Route("~/api/Sales/Update")]
-        [HttpPost]
+        [HttpPut]
         public void Update(SalesDto salesDto)
         {
             var itemToUpdate = _salesRepository.Table.FirstOrDefault(p => p.Id == salesDto.Id);
@@ -53,8 +51,7 @@ namespace Sales.Api.Controllers
             }
         }
 
-        [Route("~/api/Sales/delete")]
-        [HttpPost]
+        [HttpDelete]
         public void Delete(int id)
         {
             var itemToDelete = _salesRepository.Table.FirstOrDefault(p => p.Id == id); ;
