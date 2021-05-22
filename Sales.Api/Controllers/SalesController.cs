@@ -42,6 +42,9 @@ namespace Sales.Api.Controllers
         public async Task<IActionResult> Get(int id)
         {
             var itemToUpdate =await _salesRepository.Table.Where(p => p.PersonnelId == id).ToListAsync();
+            var grouped = (from p in itemToUpdate
+                           group p by new { month = p.ReportDate.Value.Month } into d
+                select new { count = d.Count() });
             return Ok(itemToUpdate);
         }
 
