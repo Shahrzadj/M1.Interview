@@ -20,12 +20,12 @@ namespace Sales.Api.Controllers
             _salesRepository = salesRepository;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
-        {
-            var sales = await _salesRepository.TableNoTracking.ToListAsync(cancellationToken);
-            return Ok(sales);
-        }
+        //[HttpGet]
+        //public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
+        //{
+        //    var sales = await _salesRepository.TableNoTracking.ToListAsync(cancellationToken);
+        //    return Ok(sales);
+        //}
 
         [HttpPost]
         public void Add(SalesDto salesDto)
@@ -38,17 +38,11 @@ namespace Sales.Api.Controllers
             });
         }
 
-        [HttpPut]
-        public void Update(SalesDto salesDto)
+        [HttpGet]
+        public async Task<IActionResult> Get(int id)
         {
-            var itemToUpdate = _salesRepository.Table.FirstOrDefault(p => p.Id == salesDto.Id);
-            if (itemToUpdate != null)
-            {
-                itemToUpdate.PersonnelId = salesDto.PersonnelId;
-                itemToUpdate.ReportDate = salesDto.ReportDate;
-                itemToUpdate.SalesAmount = salesDto.SalesAmount;
-                _salesRepository.Update(itemToUpdate);
-            }
+            var itemToUpdate =await _salesRepository.Table.Where(p => p.PersonnelId == id).ToListAsync();
+            return Ok(itemToUpdate);
         }
 
         [HttpDelete]

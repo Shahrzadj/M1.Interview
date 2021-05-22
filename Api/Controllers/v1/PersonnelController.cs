@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Personnel.Common.Dtos.Personnel;
@@ -52,6 +53,7 @@ namespace Personnel.Api.Controllers.v1
         }
 
         [HttpDelete]
+        [AllowAnonymous]
         public void Delete(int id)
         {
             var itemToDelete =  _personnelRepository.Table.FirstOrDefault(p=>p.Id==id);;

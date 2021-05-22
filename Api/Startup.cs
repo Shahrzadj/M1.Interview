@@ -13,6 +13,8 @@ namespace Personnel.Api
 {
     public class Startup
     {
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -33,6 +35,17 @@ namespace Personnel.Api
                 });
             });
             #endregion
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                    builder =>
+                    {
+                        builder.AllowAnyHeader();
+                        builder.AllowAnyOrigin();
+                        builder.AllowAnyMethod();
+
+                    });
+            });
             services.AddDbContext<PersonnelDbContext>(options =>
                 {
                     options.UseSqlServer(Configuration.GetConnectionString("SqlServer"));
@@ -46,6 +59,8 @@ namespace Personnel.Api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseCors(MyAllowSpecificOrigins);
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
