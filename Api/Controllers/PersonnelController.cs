@@ -8,8 +8,7 @@ using Personnel.Common.Dtos.Personnel;
 using Personnel.Data.Contracts;
 using Personnel.Entities.Personnel;
 
-
-namespace Personnel.Api.Controllers.v1
+namespace Personnel.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
