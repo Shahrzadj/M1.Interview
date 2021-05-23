@@ -48,7 +48,7 @@ namespace Sales.Api
             #endregion
             services.AddDbContext<SalesDbContext>(options =>
             {
-                options.UseSqlServer("Data Source=(localdb)\\mssqllocaldb;Initial Catalog=SalesDb;Integrated Security=true");
+                options.UseSqlServer("Data Source=.;Initial Catalog=SalesDb;Integrated Security=true");
             });
             services.AddScoped<ISalesRepository, SalesRepository>();
             services.AddControllers();
