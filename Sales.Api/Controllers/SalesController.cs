@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using Sales.Common.Dtos.Sales;
 using Sales.Data.Contracts;
 
@@ -22,13 +20,6 @@ namespace Sales.Api.Controllers
             _salesRepository = salesRepository;
         }
 
-        //[HttpGet]
-        //public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
-        //{
-        //    var sales = await _salesRepository.TableNoTracking.ToListAsync(cancellationToken);
-        //    return Ok(sales);
-        //}
-
         [HttpPost]
         public void Add(SalesDto salesDto)
         {
@@ -43,32 +34,25 @@ namespace Sales.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> Get(int id)
         {
-            var itemToUpdate =await _salesRepository.Table.Where(p => p.PersonnelId == id).OrderBy(s=>s.ReportDate).ToListAsync();
-            //var grouped = (from p in itemToUpdate
-            //               group p by new { month = p.ReportDate.Value.Month } into d
-            //    select new { count = d.Count() });
-           
-            var data = itemToUpdate.Select(k => new {  k.ReportDate.Value, k.SalesAmount })
-                .GroupBy(x => new {  x.Value.Month }, (key, group) => new
-            {
-                mnth = key.Month,
-                tCharge = group.Sum(k => k.SalesAmount).Value
-            }).ToList();
-            var c=new List<decimal>();
+            var data =await _salesRepository.Table.Where(p => p.PersonnelId == id).OrderBy(s=>s.ReportDate).Select(k => new { k.ReportDate.Value, k.SalesAmount })
+                .GroupBy(x => new { x.Value.Month }, (key, group) => new
+                {
+                    month = key.Month,
+                    amount = group.Sum(k => k.SalesAmount).Value
+                }).ToListAsync(); ;
+            var salesAmountList=new List<decimal>();
             for (int i = 1; i <= 12; i++)
             {
-                if (!data.Any(d => d.mnth == i))
+                if (data.All(d => d.month != i))
                 {
-                    decimal a = decimal.Zero;
-                    data.Add(new { mnth = i, tCharge = a });
+                    data.Add(new { month = i, amount = decimal.Zero });
                 }
             }
-
-            foreach (var item in data.OrderBy(d=>d.mnth))
+            foreach (var item in data.OrderBy(d=>d.month))
             {
-                c.Add(item.tCharge);
+                salesAmountList.Add(item.amount);
             }
-            return Ok(c);
+            return Ok(salesAmountList);
         }
 
         [HttpDelete]
