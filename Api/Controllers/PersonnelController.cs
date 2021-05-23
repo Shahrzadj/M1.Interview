@@ -23,7 +23,7 @@ namespace Personnel.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
         {
-            var personnel = await _personnelRepository.TableNoTracking.ToListAsync(cancellationToken);
+            var personnel = await _personnelRepository.GetAllPersonnel();
             return Ok(personnel);
         }
 
