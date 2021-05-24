@@ -8,8 +8,7 @@ using Personnel.Common.Dtos.Personnel;
 using Personnel.Data.Contracts;
 using Personnel.Entities.Personnel;
 
-
-namespace Personnel.Api.Controllers.v1
+namespace Personnel.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
@@ -24,39 +23,44 @@ namespace Personnel.Api.Controllers.v1
         [HttpGet]
         public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
         {
-            var personnel = await _personnelRepository.TableNoTracking.ToListAsync(cancellationToken);
+            var personnel = await _personnelRepository.GetAllPersonnel();
             return Ok(personnel);
         }
 
         [HttpPost]
-        public void Add(PersonnelDto personnelDto)
+        public IActionResult Add(PersonnelDto personnelDto)
         {
-            _personnelRepository.Add(new PersonnelModel()
+            var personnel = new PersonnelModel()
             {
                 Name = personnelDto.Name,
                 Age = personnelDto.Age,
                 Phone = personnelDto.Phone
-            });
+            };
+            _personnelRepository.Add(personnel);
+            return Ok(personnel);
         }
 
         [HttpPut]
-        public void Update(PersonnelDto personnelDto)
+        public IActionResult Update(PersonnelDto personnelDto)
         {
-            var itemToUpdate =  _personnelRepository.Table.FirstOrDefault(p=>p.Id==personnelDto.Id);
+            var itemToUpdate = _personnelRepository.Table.FirstOrDefault(p => p.Id == personnelDto.Id);
             if (itemToUpdate != null)
             {
                 itemToUpdate.Name = personnelDto.Name;
                 itemToUpdate.Age = personnelDto.Age;
                 itemToUpdate.Phone = personnelDto.Phone;
                 _personnelRepository.Update(itemToUpdate);
+                return Ok(itemToUpdate);
             }
+            return BadRequest("user not founded!");
+
         }
 
         [HttpDelete]
         [AllowAnonymous]
         public void Delete(int id)
         {
-            var itemToDelete =  _personnelRepository.Table.FirstOrDefault(p=>p.Id==id);;
+            var itemToDelete = _personnelRepository.Table.FirstOrDefault(p => p.Id == id); ;
             if (itemToDelete != null)
             {
                 _personnelRepository.Delete(itemToDelete);

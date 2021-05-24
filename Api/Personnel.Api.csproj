@@ -15,7 +15,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Data\Personnel.Data.csproj" />
-    <ProjectReference Include="..\WebFramework\Personnel.WebFramework.csproj" />
   </ItemGroup>
 
 

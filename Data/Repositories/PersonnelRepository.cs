@@ -1,5 +1,9 @@
-﻿using Data;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Data;
 using Personnel.Data.Contracts;
+using Personnel.Entities.Personnel;
 
 namespace Personnel.Data.Repositories
 {
@@ -8,6 +12,10 @@ namespace Personnel.Data.Repositories
         public PersonnelRepository(PersonnelDbContext dbContext) 
             : base(dbContext)
         {
+        }
+        public async Task<List<PersonnelModel>> GetAllPersonnel()
+        {
+            return DbContext.Personnel.ToList();
         }
     }
 }

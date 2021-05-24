@@ -1,3 +1,4 @@
+using Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -5,17 +6,16 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using Sales.Data;
-using Sales.Data.Contracts;
-using Sales.Data.Repositories;
+using Personnel.Data.Contracts;
+using Personnel.Data.Repositories;
 
-namespace Sales.Api
+namespace Personnel.Api.Test
 {
-    public class Startup
+    public class TestStartup
     {
         readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
-        public Startup(IConfiguration configuration)
+        public TestStartup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
@@ -25,33 +25,15 @@ namespace Sales.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors(options =>
-            {
-                options.AddPolicy(name: MyAllowSpecificOrigins,
-                    builder =>
-                    {
-                        builder.AllowAnyHeader();
-                        builder.AllowAnyOrigin();
-                        builder.AllowAnyMethod();
-
-                    });
-            });
-            #region Swagger
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo
+            services.AddDbContext<PersonnelDbContext>(options =>
                 {
-                    Title = "Sales Api",
-                    Version = "v1"
+                    options.UseSqlServer(Configuration.GetConnectionString("SqlServer"));
                 });
-            });
-            #endregion
-            services.AddDbContext<SalesDbContext>(options =>
-            {
-                options.UseSqlServer("Data Source=.;Initial Catalog=SalesDb;Integrated Security=true");
-            });
-            services.AddScoped<ISalesRepository, SalesRepository>();
+
+            services.AddScoped<IPersonnelRepository, PersonnelRepository>();
             services.AddControllers();
+            //Mock your repositories.
+            TestInitializer.RegisterMockRepositories(services);
 
         }
 
@@ -59,19 +41,20 @@ namespace Sales.Api
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseCors(MyAllowSpecificOrigins);
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+
             app.UseHttpsRedirection();
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Sales Api");
-            });
-            app.UseRouting();
+
+           
+
             app.UseAuthorization();
-          
+
+
+            app.UseRouting();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
