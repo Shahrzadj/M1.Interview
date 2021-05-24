@@ -52,7 +52,7 @@ namespace Personnel.Api.Controllers
                 _personnelRepository.Update(itemToUpdate);
                 return Ok(itemToUpdate);
             }
-            return BadRequest("user not founded!");
+            return BadRequest("personnel not founded!");
 
         }
 

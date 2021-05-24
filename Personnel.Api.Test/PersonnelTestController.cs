@@ -32,8 +32,8 @@ namespace Personnel.Api.Test
 
             // Assert
             var items = Assert.IsType<List<PersonnelModel>>(okResult.Value);
-            var countOfUsers = items.Count();
-            Assert.Equal(2, countOfUsers);
+            var countOfPersonnel = items.Count();
+            Assert.Equal(2, countOfPersonnel);
         }
 
         [Fact]
@@ -59,7 +59,7 @@ namespace Personnel.Api.Test
         public void Edit_ValidObject_OneItemMustEdited()
         {
             // Arrange
-            var user = new PersonnelDto()
+            var person = new PersonnelDto()
             {
                 Id = 1,
                 Name = "Shahrzad",
@@ -68,11 +68,11 @@ namespace Personnel.Api.Test
             };
 
             // Act
-            _controller.Update(user);
+            _controller.Update(person);
 
             // Assert
-            var editedUser = _repository.Table.FirstOrDefault(r=>r.Id==1);
-            if (editedUser != null) Assert.Equal("Shahrzad", editedUser.Name);
+            var editedperson = _repository.Table.FirstOrDefault(r=>r.Id==1);
+            if (editedperson != null) Assert.Equal("Shahrzad", editedperson.Name);
         }
     }
 }
