@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Data;
+using Microsoft.EntityFrameworkCore;
 using Personnel.Data.Contracts;
 using Personnel.Entities.Personnel;
 
@@ -13,9 +14,9 @@ namespace Personnel.Data.Repositories
             : base(dbContext)
         {
         }
-        public async Task<List<PersonnelModel>> GetAllPersonnel()
+        public List<PersonnelModel> GetAll()
         {
-            return DbContext.Personnel.ToList();
+            return Table.AsNoTracking().ToList();
         }
     }
 }
