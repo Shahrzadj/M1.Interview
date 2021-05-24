@@ -13,6 +13,7 @@ namespace Sales.Entities.Sales
         [Required]
         public int PersonnelId { get; set; }
         public DateTime? ReportDate { get; set; }
+        [Column(TypeName = "decimal(10,2)")]
         public decimal? SalesAmount { get; set; }
     }
 }
