@@ -34,12 +34,12 @@ namespace Sales.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> Get(int id)
         {
-            var data =await _salesRepository.Table.Where(p => p.PersonnelId == id).OrderBy(s=>s.ReportDate).Select(k => new { k.ReportDate.Value, k.SalesAmount })
+            var data = _salesRepository.Table.Where(p => p.PersonnelId == id).OrderBy(s=>s.ReportDate).Select(k => new { k.ReportDate.Value, k.SalesAmount })
                 .GroupBy(x => new { x.Value.Month }, (key, group) => new
                 {
                     month = key.Month,
                     amount = group.Sum(k => k.SalesAmount).Value
-                }).ToListAsync(); ;
+                }).ToList(); ;
             var salesAmountList=new List<decimal>();
             for (int i = 1; i <= 12; i++)
             {
