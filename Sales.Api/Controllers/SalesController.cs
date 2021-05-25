@@ -28,7 +28,7 @@ namespace Sales.Api.Controllers
             _salesRepository.Add(new Entities.Sales.Sales()
             {
                 PersonnelId = salesDto.PersonnelId,
-                ReportDate = new DateTime(),
+                ReportDate =new DateTime(salesDto.Year,salesDto.Month,salesDto.Day),
                 SalesAmount = salesDto.SalesAmount
             });
         }
@@ -38,8 +38,14 @@ namespace Sales.Api.Controllers
         {
             List<string> labels=new List<string>();
             List<decimal> datas = new List<decimal>();
+            var monthName = "";
+
             var allData = _salesRepository.Table.Where(p => p.PersonnelId == id && p.ReportDate.Value.Month==month && p.ReportDate.Value.Year==year).OrderBy(s => s.ReportDate).ToList();
-            int days = DateTime.DaysInMonth(2020, month);
+            if (allData.Any())
+            {
+                monthName = allData[0].ReportDate.Value.ToMonthName();
+
+                int days = DateTime.DaysInMonth(2020, month);
                 for (int day = 1; day <= days; day++)
                 {
                     if (allData.Any(d => d.ReportDate.Value.Day == day))
@@ -49,18 +55,20 @@ namespace Sales.Api.Controllers
                         labels.Add(day.ToString());
                         datas.Add(item.SalesAmount.Value);
                     }
-                  
+
                     else
                     {
                         labels.Add(day.ToString());
                         datas.Add(0);
                     }
                 }
-                var res = new
+            }
+
+            var res = new
             {
                 Labelset = labels,
                 dataset = datas,
-                monthName= allData[0].ReportDate.Value.ToMonthName()
+                monthName= monthName
                 };
             return Ok(res);
         }
