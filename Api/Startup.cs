@@ -13,8 +13,6 @@ namespace Personnel.Api
 {
     public class Startup
     {
-        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
-
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -53,10 +51,6 @@ namespace Personnel.Api
             {
                 app.UseDeveloperExceptionPage();
             }
-
-           
-
-            app.UseAuthorization();
 
             app.UseSwagger();
             app.UseSwaggerUI(c =>
