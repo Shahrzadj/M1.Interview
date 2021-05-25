@@ -5,51 +5,51 @@
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 4001
+          "Host": "api.sales.developair.ir",
+          "Port": 443
         }
       ],
       "UpstreamPathTemplate": "/gateway/sales",
-      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ]
+      "UpstreamhttpsMethod": [ "POST", "PUT", "DELETE" ]
     },
     {
       "DownstreamPathTemplate": "/api/sales/?id={id}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 4001
+          "Host": "api.sales.developair.ir",
+          "Port": 443
         }
       ],
       "UpstreamPathTemplate": "/gateway/sales/{id}",
-      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ]
+      "UpstreamhttpsMethod": [ "GET", "POST", "PUT", "DELETE" ]
     },
     {
       "DownstreamPathTemplate": "/api/personnel",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 3001
+          "Host": "api.personnel.developair.ir",
+          "Port": 443
         }
       ],
       "UpstreamPathTemplate": "/gateway/personnel",
-      "UpstreamHttpMethod": [ "GET", "POST", "PUT" ]
+      "UpstreamhttpsMethod": [ "GET", "POST", "PUT" ]
     },
     {
       "DownstreamPathTemplate": "/api/personnel/?id={id}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": 3001
+          "Host": "api.personnel.developair.ir",
+          "Port": 443
         }
       ],
       "UpstreamPathTemplate": "/gateway/personnel/{id}",
-      "UpstreamHttpMethod": [ "DELETE" ]
+      "UpstreamhttpsMethod": [ "DELETE" ]
     }
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "https://localhost:5001"
+    "BaseUrl": "https://api.gateway.developair.ir"
   }
 }
