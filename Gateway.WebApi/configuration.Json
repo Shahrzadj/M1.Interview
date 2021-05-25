@@ -10,7 +10,7 @@
         }
       ],
       "UpstreamPathTemplate": "/gateway/sales",
-      "UpstreamHttpMethod": [ "POST", "PUT", "DELETE" ]
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ]
     },
     {
       "DownstreamPathTemplate": "/api/sales/?id={id}",

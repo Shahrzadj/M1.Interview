@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient.DataClassification;
 using Microsoft.EntityFrameworkCore;
 using Sales.Common.Dtos.Sales;
 using Sales.Data.Contracts;
@@ -32,27 +34,34 @@ namespace Sales.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get(int id)
+        public async Task<IActionResult> Get(int id,string name)
         {
-            var data = _salesRepository.Table.Where(p => p.PersonnelId == id).OrderBy(s=>s.ReportDate).Select(k => new { k.ReportDate.Value, k.SalesAmount })
-                .GroupBy(x => new { x.Value.Month }, (key, group) => new
+            List<string> labels=new List<string>();
+            List<decimal> datas = new List<decimal>();
+            var allData = _salesRepository.Table.Where(p => p.PersonnelId == id && p.ReportDate.Value.Month==5).OrderBy(s => s.ReportDate).ToList();
+            int days = DateTime.DaysInMonth(2020, 5);
+                for (int day = 1; day <= days; day++)
                 {
-                    month = key.Month,
-                    amount = group.Sum(k => k.SalesAmount).Value
-                }).ToList(); ;
-            var salesAmountList=new List<decimal>();
-            for (int i = 1; i <= 12; i++)
-            {
-                if (data.All(d => d.month != i))
-                {
-                    data.Add(new { month = i, amount = decimal.Zero });
+                    if (allData.Any(d => d.ReportDate.Value.Day == day))
+                    {
+                        var itemss = allData.FirstOrDefault(d => d.ReportDate.Value.Day == day);
+                        var label = day.ToString();
+                        labels.Add(day.ToString());
+                        datas.Add(itemss.SalesAmount.Value);
+                    }
+                  
+                    else
+                    {
+                        labels.Add(day.ToString());
+                        datas.Add(0);
+                    }
                 }
-            }
-            foreach (var item in data.OrderBy(d=>d.month))
+                var res = new
             {
-                salesAmountList.Add(item.amount);
-            }
-            return Ok(salesAmountList);
+                Labelset = labels,
+                dataset = datas
+                };
+            return Ok(res);
         }
 
         [HttpDelete]
@@ -64,5 +73,17 @@ namespace Sales.Api.Controllers
                 _salesRepository.Delete(itemToDelete);
             }
         }
+    }
+}
+static class DateTimeExtensions
+{
+    public static string ToMonthName(this DateTime dateTime)
+    {
+        return CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(dateTime.Month);
+    }
+
+    public static string ToShortMonthName(this DateTime dateTime)
+    {
+        return CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedMonthName(dateTime.Month);
     }
 }
