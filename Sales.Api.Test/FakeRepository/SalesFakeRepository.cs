@@ -19,7 +19,7 @@ namespace Sales.Api.Test.FakeRepository
                 new Entities.Sales.Sales(){Id = 2,ReportDate = DateTime.Now,SalesAmount = 30,PersonnelId = 2},
             };
         }
-        public DbSet<Entities.Sales.Sales> Entities => throw new NotImplementedException();
+        public DbSet<Entities.Sales.Sales> Entities =>throw new NotImplementedException();
         public IQueryable<Entities.Sales.Sales> Table => _salesList.AsQueryable();
         public IQueryable<Entities.Sales.Sales> TableNoTracking => throw new NotImplementedException();
         public void Add(Entities.Sales.Sales entity, bool saveNow = true)

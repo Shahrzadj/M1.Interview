@@ -39,7 +39,7 @@ namespace Sales.Api.Controllers
             List<decimal> SaleAmountsDataset = new List<decimal>();
             var monthName = "";
             decimal saleAmount=decimal.Zero;
-            var salesListForSpecificPerson =await _salesRepository.Table.Where(p => p.PersonnelId == id && p.ReportDate.Value.Month==month && p.ReportDate.Value.Year==year).OrderBy(s => s.ReportDate).ToListAsync();
+            var salesListForSpecificPerson = _salesRepository.Table.Where(p => p.PersonnelId == id && p.ReportDate.Value.Month==month && p.ReportDate.Value.Year==year).OrderBy(s => s.ReportDate).ToList();
             if (salesListForSpecificPerson.Any())
             {
                 monthName = salesListForSpecificPerson[0].ReportDate.Value.ToMonthName();
@@ -56,7 +56,7 @@ namespace Sales.Api.Controllers
                     SaleAmountsDataset.Add(saleAmount);
                 }
             }
-            return Ok(new
+            return Ok(new SalesListInChartDto()
             {
                 Labelset = labelDataset,
                 dataset = SaleAmountsDataset,
