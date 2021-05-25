@@ -4,7 +4,6 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Data.SqlClient.DataClassification;
 using Microsoft.EntityFrameworkCore;
 using Sales.Common.Dtos.Sales;
 using Sales.Data.Contracts;
@@ -34,43 +33,35 @@ namespace Sales.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get(int id,int month,int year)
+        public async Task<IActionResult> Get(int id, int month, int year)
         {
-            List<string> labels=new List<string>();
-            List<decimal> datas = new List<decimal>();
+            List<string> labelDataset=new List<string>();
+            List<decimal> SaleAmountsDataset = new List<decimal>();
             var monthName = "";
-
-            var allData = _salesRepository.Table.Where(p => p.PersonnelId == id && p.ReportDate.Value.Month==month && p.ReportDate.Value.Year==year).OrderBy(s => s.ReportDate).ToList();
-            if (allData.Any())
+            decimal saleAmount=decimal.Zero;
+            var salesListForSpecificPerson =await _salesRepository.Table.Where(p => p.PersonnelId == id && p.ReportDate.Value.Month==month && p.ReportDate.Value.Year==year).OrderBy(s => s.ReportDate).ToListAsync();
+            if (salesListForSpecificPerson.Any())
             {
-                monthName = allData[0].ReportDate.Value.ToMonthName();
-
-                int days = DateTime.DaysInMonth(2020, month);
+                monthName = salesListForSpecificPerson[0].ReportDate.Value.ToMonthName();
+                int days = DateTime.DaysInMonth(year, month);
                 for (int day = 1; day <= days; day++)
                 {
-                    if (allData.Any(d => d.ReportDate.Value.Day == day))
+                    saleAmount = decimal.Zero;
+                    if (salesListForSpecificPerson.Any(d => d.ReportDate.Value.Day == day))
                     {
-                        var item = allData.FirstOrDefault(d => d.ReportDate.Value.Day == day);
-                        var label = day.ToString();
-                        labels.Add(day.ToString());
-                        datas.Add(item.SalesAmount.Value);
+                        var item = salesListForSpecificPerson.FirstOrDefault(d => d.ReportDate.Value.Day == day);
+                        saleAmount = item.SalesAmount.Value;
                     }
-
-                    else
-                    {
-                        labels.Add(day.ToString());
-                        datas.Add(0);
-                    }
+                    labelDataset.Add(day.ToString());
+                    SaleAmountsDataset.Add(saleAmount);
                 }
             }
-
-            var res = new
+            return Ok(new
             {
-                Labelset = labels,
-                dataset = datas,
-                monthName= monthName
-                };
-            return Ok(res);
+                Labelset = labelDataset,
+                dataset = SaleAmountsDataset,
+                monthName = monthName
+            });
         }
 
         [HttpDelete]
