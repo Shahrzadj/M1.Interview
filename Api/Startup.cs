@@ -25,6 +25,7 @@ namespace Personnel.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             #region Swagger
             services.AddSwaggerGen(c =>
             {
@@ -35,17 +36,6 @@ namespace Personnel.Api
                 });
             });
             #endregion
-            services.AddCors(options =>
-            {
-                options.AddPolicy(name: MyAllowSpecificOrigins,
-                    builder =>
-                    {
-                        builder.AllowAnyHeader();
-                        builder.AllowAnyOrigin();
-                        builder.AllowAnyMethod();
-
-                    });
-            });
             services.AddDbContext<PersonnelDbContext>(options =>
                 {
                     options.UseSqlServer(Configuration.GetConnectionString("SqlServer"));
@@ -59,14 +49,10 @@ namespace Personnel.Api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseCors(MyAllowSpecificOrigins);
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            app.UseHttpsRedirection();
 
            
 
@@ -78,6 +64,7 @@ namespace Personnel.Api
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Personnel Api");
             });
             app.UseRouting();
+            app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
