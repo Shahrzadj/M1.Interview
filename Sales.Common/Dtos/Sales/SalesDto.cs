@@ -9,6 +9,11 @@ namespace Sales.Common.Dtos.Sales
         public int Id { get; set; }
         public int PersonnelId { get; set; }
         public DateTime? ReportDate { get; set; }
-        public decimal? SalesAmount { get; set; }
+        public int SalesAmount { get; set; }
+        public int Year { get; set; }
+        public int Month { get; set; }
+        public int Day { get; set; }
+
+
     }
 }
