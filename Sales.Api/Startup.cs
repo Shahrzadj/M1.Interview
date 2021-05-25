@@ -13,7 +13,6 @@ namespace Sales.Api
 {
     public class Startup
     {
-
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -57,7 +56,7 @@ namespace Sales.Api
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Sales Api");
             });
-             app.UseRouting();
+            app.UseRouting();
             app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseAuthorization();
           
