@@ -34,20 +34,20 @@ namespace Sales.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get(int id,string name)
+        public async Task<IActionResult> Get(int id,int month,int year)
         {
             List<string> labels=new List<string>();
             List<decimal> datas = new List<decimal>();
-            var allData = _salesRepository.Table.Where(p => p.PersonnelId == id && p.ReportDate.Value.Month==5).OrderBy(s => s.ReportDate).ToList();
-            int days = DateTime.DaysInMonth(2020, 5);
+            var allData = _salesRepository.Table.Where(p => p.PersonnelId == id && p.ReportDate.Value.Month==month && p.ReportDate.Value.Year==year).OrderBy(s => s.ReportDate).ToList();
+            int days = DateTime.DaysInMonth(2020, month);
                 for (int day = 1; day <= days; day++)
                 {
                     if (allData.Any(d => d.ReportDate.Value.Day == day))
                     {
-                        var itemss = allData.FirstOrDefault(d => d.ReportDate.Value.Day == day);
+                        var item = allData.FirstOrDefault(d => d.ReportDate.Value.Day == day);
                         var label = day.ToString();
                         labels.Add(day.ToString());
-                        datas.Add(itemss.SalesAmount.Value);
+                        datas.Add(item.SalesAmount.Value);
                     }
                   
                     else
@@ -59,7 +59,8 @@ namespace Sales.Api.Controllers
                 var res = new
             {
                 Labelset = labels,
-                dataset = datas
+                dataset = datas,
+                monthName= allData[0].ReportDate.Value.ToMonthName()
                 };
             return Ok(res);
         }
